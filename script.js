@@ -90,22 +90,31 @@ function crearMalla() {
 
 function aprobarRamo(id) {
   const ramo = estadoRamos[id];
-  if (ramo.aprobado || ramo.element.classList.contains("bloqueado")) return;
 
-  ramo.aprobado = true;
-  ramo.element.classList.add("aprobado");
-  ramo.element.classList.remove("bloqueado");
+  if (ramo.element.classList.contains("bloqueado")) return;
+
+  ramo.aprobado = !ramo.aprobado;
+
+  ramo.element.classList.toggle("aprobado", ramo.aprobado);
+
   actualizarRamos();
+}
+
 }
 
 function actualizarRamos() {
   for (const r of ramos) {
-    if (estadoRamos[r.id].aprobado) continue;
+    if (estadoRamos[r.id].aprobado) {
+      estadoRamos[r.id].element.classList.remove("bloqueado");
+      continue;
+    }
+
     const requisitosAprobados = r.requisitos.every(req => estadoRamos[req]?.aprobado);
     if (requisitosAprobados) {
       estadoRamos[r.id].element.classList.remove("bloqueado");
+    } else {
+      estadoRamos[r.id].element.classList.add("bloqueado");
     }
   }
 }
-
 crearMalla();
