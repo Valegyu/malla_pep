@@ -1,5 +1,5 @@
 const ramos = [
-  { id: "EPI_JUEGO", nombre: "Epistemología del Juego y de la Infancia", semestre: 1, requisitos: [] },
+    { id: "EPI_JUEGO", nombre: "Epistemología del Juego y de la Infancia", semestre: 1, requisitos: [] },
   { id: "ANTROPOLOGIA", nombre: "Socio Antropología Educacional", semestre: 1, requisitos: [] },
   { id: "IDENTIDAD_DOCENTE", nombre: "Construcción de la Identidad Profesional Docente", semestre: 1, requisitos: [] },
   { id: "HISTORIA_ED_PARV", nombre: "Fundamentos e Historia de la Educación Parvularia", semestre: 1, requisitos: [] },
@@ -90,31 +90,22 @@ function crearMalla() {
 
 function aprobarRamo(id) {
   const ramo = estadoRamos[id];
+  if (ramo.aprobado || ramo.element.classList.contains("bloqueado")) return;
 
-  if (ramo.element.classList.contains("bloqueado")) return;
-
-  ramo.aprobado = !ramo.aprobado;
-
-  ramo.element.classList.toggle("aprobado", ramo.aprobado);
-
+  ramo.aprobado = true;
+  ramo.element.classList.add("aprobado");
+  ramo.element.classList.remove("bloqueado");
   actualizarRamos();
-}
-
 }
 
 function actualizarRamos() {
   for (const r of ramos) {
-    if (estadoRamos[r.id].aprobado) {
-      estadoRamos[r.id].element.classList.remove("bloqueado");
-      continue;
-    }
-
+    if (estadoRamos[r.id].aprobado) continue;
     const requisitosAprobados = r.requisitos.every(req => estadoRamos[req]?.aprobado);
     if (requisitosAprobados) {
       estadoRamos[r.id].element.classList.remove("bloqueado");
-    } else {
-      estadoRamos[r.id].element.classList.add("bloqueado");
     }
   }
 }
+
 crearMalla();
