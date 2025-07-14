@@ -101,11 +101,12 @@ function aprobarRamo(id) {
 function actualizarRamos() {
   for (const r of ramos) {
     if (estadoRamos[r.id].aprobado) continue;
+
     const requisitosAprobados = r.requisitos.every(req => estadoRamos[req]?.aprobado);
     if (requisitosAprobados) {
       estadoRamos[r.id].element.classList.remove("bloqueado");
+    } else {
+      estadoRamos[r.id].element.classList.add("bloqueado");
     }
   }
 }
-
-crearMalla();
