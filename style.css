@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  padding: 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#malla {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.semestre {
+  background-color: #d6eaf8;
+  border-radius: 12px;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 2px 2px 6px #aaa;
+}
+
+.semestre h2 {
+  text-align: center;
+  color: #2e86c1;
+  margin-bottom: 10px;
+}
+
+.ramo {
+  background-color: #aed6f1;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.ramo:hover {
+  background-color: #85c1e9;
+}
+
+.ramo.aprobado {
+  text-decoration: line-through;
+  background-color: #d5f5e3;
+  color: #2e7d32;
+}
+
+.ramo.bloqueado {
+  background-color: #f2f2f2;
+  color: #aaa;
+  cursor: not-allowed;
+}
